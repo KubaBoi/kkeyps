@@ -14,8 +14,19 @@
 </head>
 <body>
 
-<h1>Welcome to KKeyps</h1>
+<div class="loadingDiv" id="loaderDiv">
+    <div class="loader">
+    </div>
+</div>
 
+<h3>Registration</h3>
+<table class="centerTable">
+    <tr><td>E-mail: </td><td class="t"><input id="mailInp" type="text" placeholder="E-mail" class="textBox"></td></tr>
+    <tr><td>Password: </td><td class="t"><input id="regPass1Inp" type="password" placeholder="Password" class="textBox"></td></tr>
+    <tr><td>Password again: </td><td class="t"><input id="regPass2Inp" type="password" placeholder="Password again" class="textBox"></td></tr>
+</table>
+<button id="registerButt" onclick="register()">Register</button><br>
+<button id="backToLoginButt" onclick="window.location = '/login.html'">Back to login</button>
 
 <!-- EXTERNAL SCRIPTS -->
 <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/time.js"></script>
@@ -31,11 +42,9 @@
 <script src="scripts/customs/loading.js"></script>
 
 <!-- AUTHORIZATION -->
-<script src="scripts/authorization/loginScript.js"></script>
+<script src="scripts/authorization/registrationScript.js"></script>
 
-<!-- START -->
 <script src="scripts/inits/variables.js"></script>
-<script src="scripts/inits/start.js"></script>
 
 </body>
 </html>
