@@ -37,7 +37,6 @@ class UserController(cc):
     #@get /login;
     @staticmethod
     def login(server, path, auth):
-        raise BadRequest("ioujhnb")
         return cc.createResponse({"STATUS": "OK"}, 200)
 
 

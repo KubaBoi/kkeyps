@@ -4,8 +4,9 @@ async function login(userName, password) {
 
     var response = await callEndpoint("GET", "/users/login");
     if (!response.ERROR) {
-        loggedUser = response.USER;
-        succLogin(response);
+        if (window.location.pathname != "/") {
+            window.location = "/";
+        }
     } 
     else {
         if (window.location.pathname == "/") {
