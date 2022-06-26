@@ -3,6 +3,9 @@
 logs/*.log
 logs/*.html
 
+secrets.json
+adminSettings.json
+
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,python
 
