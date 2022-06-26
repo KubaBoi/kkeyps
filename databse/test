@@ -1,0 +1,9 @@
+select * from users;
+select * from account_passwords;
+
+select * from account_passwords inner join users on account_passwords.user_id = users.id
+where account_passwords.password = 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒÄôÐÎ¾¾jjnÌÈÓÔ§¡Ó';
+
+select case when exists (select * from account_passwords inner join users on account_passwords.user_id = users.id where account_passwords.password = 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒ
+
+                                                                                                                                                                                                ÄôÐÎ¾¾jjnÌÈÓÔ§¡Ó';) then cast(1 as bit) else cast(0 as bit) end;

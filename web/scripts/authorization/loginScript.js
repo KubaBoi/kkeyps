@@ -2,10 +2,16 @@
 async function login(userName, password) {
     authorization = `${userName}:${password}`;
 
+    setCookie("login", userName, loginCookiesDuration);
+    setCookie("password", password, loginCookiesDuration);
+
     var response = await callEndpoint("GET", "/users/login");
     if (!response.ERROR) {
         if (window.location.pathname != "/") {
             window.location = "/";
+        }
+        else {
+            return true;
         }
     } 
     else {
@@ -28,18 +34,7 @@ function newLogin() {
     var userName = document.getElementById("nameInp").value;
     var password = document.getElementById("passInp").value;
 
-    setCookie("login", userName, 5);
-    setCookie("password", password, 5);
-
     login(userName, password);
-}
-
-async function succLogin(response) {
-    document.getElementById("singInButt").setAttribute("disabled", "");
-    document.getElementById("regButt").setAttribute("disabled", "");
-    document.getElementById("forgPassButt").setAttribute("disabled", "");
-
-    window.location = "/";
 }
 
 function logout() {

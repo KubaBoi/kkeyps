@@ -17,4 +17,22 @@ CREATE TABLE IF NOT EXISTS public.account_passwords
     password text NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS public.roles
+(
+    id text NOT NULL,
+    role_id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.passwords
+(
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    user_name text NOT NULL,
+    web text NOT NULL,
+    password text NOT NULL,
+    PRIMARY KEY (id)
+);
 END;

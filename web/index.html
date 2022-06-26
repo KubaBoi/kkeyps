@@ -14,8 +14,32 @@
 </head>
 <body>
 
-<h1>Welcome to KKeyps</h1>
+<h1>KKeyps</h1>
+<button onclick="logout()">Log out</button>
+<button onclick="addPassword()">Add password</button>
+<br>
+<table id="passTable"></table>
 
+<div id="addPassDiv">
+    <table>
+        <tr>
+            <td>Web:</td>
+            <td><input id="webInp" type="text" placeholder="Web"></input></td>
+        </tr>
+        <tr>
+            <td>User name:</td>
+            <td><input id="userNameInp" type="text" placeholder="User Name"></input></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input id="passInp" type="password" placeholder="Password"></input></td>
+            <td><button onclick="randomPass()">Generate random</button></td>
+        </tr>
+    </table>
+    <br><br>
+    <button onclick="createPassword()">Save password</button>
+    <button onclick="closeAddPassword()">Close</button>
+</div>
 
 <!-- EXTERNAL SCRIPTS -->
 <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/time.js"></script>
@@ -30,8 +54,14 @@
 <!-- CUSTOM -->
 <script src="scripts/customs/loading.js"></script>
 
+<!-- API CONTROLLERS -->
+<script src="scripts/apiControllers/passManager.js"></script>
+
 <!-- AUTHORIZATION -->
 <script src="scripts/authorization/loginScript.js"></script>
+
+<!-- BUILDERS -->
+<script src="scripts/builders/passTableBuilder.js"></script>
 
 <!-- START -->
 <script src="scripts/inits/variables.js"></script>
