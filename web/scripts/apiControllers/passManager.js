@@ -40,6 +40,20 @@ function randomPass(length=20) {
     document.getElementById("passInp").value = result;
 }
 
+async function copyPass(index) {
+    let web = document.getElementById(`webTd${index}`).innerHTML;
+    let userName = document.getElementById(`userNameTd${index}`).innerHTML;
+    
+    let response = await callEndpoint("GET", `/passwords/show?web=${web}&userName=${userName}`);
+    if (response.ERROR == null) {
+        navigator.clipboard.writeText(response.PASSWORD);
+        showOkAlert("Copied :)", "Password has been inserted into your clipboard", alertTime);
+    }
+    else {
+        showErrorAlert(response.ERROR, alertTime);
+    }
+}
+
 async function showPass(index) {
     let web = document.getElementById(`webTd${index}`).innerHTML;
     let userName = document.getElementById(`userNameTd${index}`).innerHTML;

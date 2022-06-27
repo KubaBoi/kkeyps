@@ -22,6 +22,7 @@ async function buildPassTable() {
                 {"text": psw.WEB, "attributes": [{"name": "id", "value": `webTd${i}`}]},
                 {"text": psw.USER_NAME, "attributes": [{"name": "id", "value": `userNameTd${i}`}]},
                 {"text": psw.PASSWORD, "attributes": [{"name": "id", "value": `passTd${i}`}, {"name": "class", "value": "passTd"}]},
+                {"text": `<img src='/images/copyPass.png' onclick=copyPass(${i})>`},
                 {"text": `<img src='/images/showPass.png' onclick=showPass(${i})>`, "attributes": [{"name": "id", "value": `showTd${i}`}]},
                 {"text": `<img src='/images/removePass.png' onclick=removePass(${i})>`}
             ]);
