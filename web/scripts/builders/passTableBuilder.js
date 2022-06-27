@@ -8,6 +8,7 @@ async function buildPassTable() {
         let psws = response.PASSWORDS;
 
         addHeader(tbl, [
+            {"text": ""},
             {"text": "Web"},
             {"text": "User name"},
             {"text": "Password"}
@@ -17,6 +18,7 @@ async function buildPassTable() {
             let psw = psws[i];
 
             addRow(tbl, [
+                {"text": `<img src="https://s2.googleusercontent.com/s2/favicons?domain=${psw.WEB}">`},
                 {"text": psw.WEB, "attributes": [{"name": "id", "value": `webTd${i}`}]},
                 {"text": psw.USER_NAME, "attributes": [{"name": "id", "value": `userNameTd${i}`}]},
                 {"text": psw.PASSWORD, "attributes": [{"name": "id", "value": `passTd${i}`}]},
