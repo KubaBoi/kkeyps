@@ -1,6 +1,6 @@
 
 
-let address = "http://localhost";
+let address = "http://frogie.cz:7969";
 var userName = getCookie("login");
 var password = getCookie("password");
 login(userName, password);
