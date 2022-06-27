@@ -11,3 +11,9 @@ class PasswordsRepository(CheeseRepository):
     @staticmethod
     def findByUserIdAndWebAndUserName(userId, web, userName):
         return CheeseRepository.query(userId=userId, web=web, userName=userName)
+
+    #@query "select * from passwords where user_id=:userId and web=:web;";
+    #@return array;
+    @staticmethod
+    def findByUserIdAndWeb(userId, web):
+        return CheeseRepository.query(userId=userId, web=web)

@@ -69,3 +69,17 @@ class PasswordsController(cc):
         pr.delete(pswModel)
 
         return cc.createResponse({"STATUS": "Removed"})
+
+    #@get /getByWeb;
+    @staticmethod
+    def getByWeb(server, path, auth):
+        args = cc.getArgs(path)
+        cc.checkJson(["web"], args)
+
+        userModel = ur.findOneBy("email", auth["login"]["login"])
+        passwords = pr.findByUserIdAndWeb(userModel.id, args["web"])
+
+        for psw in passwords:
+            psw.password = "HIDDEN"
+
+        return cc.createResponse({"PASSWORDS": cc.modulesToJsonArray(passwords)})
