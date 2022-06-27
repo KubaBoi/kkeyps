@@ -49,12 +49,20 @@ class UsersController(cc):
 
     @staticmethod
     def registerMachineWithHeaders(headers, ip, userModel):
+        userAgent = ""
+        platform = ""
+        if ("User-Agent" in headers.keys()):
+            userAgent = headers["User-Agent"]
+        if ("sec-ch-ua-platform" in headers.keys()):
+            platform = headers["sec-ch-ua-platform"]
+        print(headers)
+
         machineModel = mr.model()
         machineModel.setAttrs(
             ip = ip,
             user_id = userModel.id,
-            user_agent = headers["User-Agent"],
-            platform = headers["sec-ch-ua-platform"],
+            user_agent = userAgent,
+            platform = platform,
             origin_date = datetime.now(),
             last_connection = datetime.now(),
             verified = False,
