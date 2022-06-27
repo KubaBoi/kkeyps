@@ -1,42 +1,70 @@
 
-let changeColor = document.getElementById("changeColor");
+
 let address = "http://localhost";
+var userName = getCookie("login");
+var password = getCookie("password");
+login(userName, password);
+updateTable();
 
-changeColor.addEventListener("click", async () => {
-    /*let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: setPageBackgroundColor,
-    });*/
-    chrome.storage.sync.get("color", ({ color }) => {
-        changeColor.style.backgroundColor = color;
-    });
-});
-  
-function setPageBackgroundColor() {
-    chrome.storage.sync.get("color", ({ color }) => {
-        document.body.style.backgroundColor = color;
-    });
-}
+let loginButt = document.getElementById("loginButt");
+let logoutButt = document.getElementById("logoutButt");
+let updateButt = document.getElementById("updateButt");
 
-async function login() {
-    authorization = `${userName}:${password}`;
+loginButt.addEventListener("click", newLogin);
+logoutButt.addEventListener("click", logout);
+updateButt.addEventListener("click", updateTable);
 
-    setCookie("login", userName, loginCookiesDuration);
-    setCookie("password", password, loginCookiesDuration);
+async function updateTable() {
+    let tbl = document.getElementById("passTable");
+    clearTable(tbl);
 
-    var response = await callEndpoint("GET", `${address}/users/login`);
-    if (!response.ERROR) {
-        console.log(response);
-    } 
-    else {
-        showErrorAlert(response.ERROR, alertTime);
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let web = tab.url.split("/");
+    web = `${web[0]}//${web[2]}`;
+
+    let response = await callEndpoint("GET", `${address}/passwords/getByWeb?web=${web}`);
+    if (response.ERROR == null) {
+        document.getElementById("errorP2").innerHTML = "";
+        let psws = response.PASSWORDS;
+
+        addHeader(tbl, [{"text": "User name"}]);
+
+        for (let i = 0; i < psws.length; i++) {
+            let psw = psws[i];
+
+            addRow(tbl, [
+                {"text": psw.USER_NAME},
+                {"text": `<button id="${psw.USER_NAME}">Copy</button>`}
+            ]);
+
+            let butt = document.getElementById(`${psw.USER_NAME}`);
+            butt.addEventListener("click", copyPass);
+        }
+
+        if (psws.length == 0) {
+            document.getElementById("errorP2").innerHTML = "There are not any storred passwords for this website";
+        }
     }
-}
+    else {
+        document.getElementById("errorP2").innerHTML = response.ERROR.DESCRIPTION;
+        console.log(response.ERROR);
+    }
+} 
 
-function newLogin() {
-    var userName = document.getElementById("nameInp").value;
-    var password = document.getElementById("passInp").value;
+async function copyPass() {
+    let userName = this.id;
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let web = tab.url.split("/");
+    web = `${web[0]}//${web[2]}`;
 
-    login(userName, password);
+    let response = await callEndpoint("GET", `${address}/passwords/show?web=${web}&userName=${userName}`);
+    if (response.ERROR == null) {
+        document.getElementById("errorP2").innerHTML = "";
+
+        navigator.clipboard.writeText(response.PASSWORD);
+    }
+    else {
+        document.getElementById("errorP2").innerHTML = response.ERROR.DESCRIPTION;
+        console.log(response.ERROR);
+    }
 }

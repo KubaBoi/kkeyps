@@ -10,12 +10,14 @@
         "storage", 
         "declarativeContent", 
         "activeTab", 
-        "scripting"
+        "scripting",
+        "contextMenus",
+        "tabs"
     ],
     "action": {
         "default_popup": "popup.html"
     },
-    "content_security_policy": {
-        "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://kubaboi.github.io/;"
-    }
+    "host_permissions": [
+        "http://*/"
+    ]
 }

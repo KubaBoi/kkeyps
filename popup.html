@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <h1>KKeyps</h1>
-    <input type="text" id="nameInp"></input>
-    <input type="password" id="passInp"></input>
-    <button id="changeColor">Sing in</button>
+    <a href="http://localhost" target="_blank">KKeyps web</a>
+    <div id="loginDiv">
+        <input type="text" id="nameInp"></input>
+        <input type="password" id="passInp"></input>
+        <button id="loginButt">Sing in</button>
+    </div>
+    <p id="errorP" style="color:red"></p>
+    <div id="loggedDiv">
+        <button id="logoutButt">Logout</button>
+        <button id="updateButt">Update</button>
+        <table id="passTable"></table>
+        <p id="errorP2" style="color:red"></p>
+    </div>
 
-    <!-- EXTERNAL SCRIPTS -->
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/time.js"></script>
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/communication.js"></script>
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/cookies.js"></script>
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/alerts.js"></script>
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/elementManager.js"></script>
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/tableBuilder.js"></script> 
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/autoComplete.js"></script> 
-    <script src="https://kubaboi.github.io/CheeseFramework/public/scripts/arrays.js"></script> 
-
+    <script src="cheese.js"></script>
+    <script src="authorization.js"></script>
     <script src="popup.js"></script>
 </body>
 </html>
