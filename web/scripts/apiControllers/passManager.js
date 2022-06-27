@@ -41,6 +41,10 @@ function randomPass(length=20) {
 }
 
 async function copyPass(index) {
+    if (!window.isSecureContext) {
+        showWrongAlert("Non secured window", "Sorry, for copying into clipboard is needed 'https' or 'localhost' :/", alertTime);
+        return;
+    }
     let web = document.getElementById(`webTd${index}`).innerHTML;
     let userName = document.getElementById(`userNameTd${index}`).innerHTML;
     
