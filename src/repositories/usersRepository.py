@@ -2,7 +2,7 @@
 from Cheese.cheeseRepository import CheeseRepository
 
 #@repository users;
-#@dbscheme (id, email);
+#@dbscheme (id, email, enabled);
 #@dbmodel User;
 class UsersRepository(CheeseRepository):
     
@@ -13,4 +13,4 @@ class UsersRepository(CheeseRepository):
     #@return bool;
     @staticmethod
     def validateEmail(email):
-        CheeseRepository.query(email=email)
+        return CheeseRepository.query(email=email)

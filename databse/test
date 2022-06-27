@@ -1,9 +1,15 @@
 select * from users;
 select * from account_passwords;
+select * from machines;
+select * from confirmations;
 
-select * from account_passwords inner join users on account_passwords.user_id = users.id
-where account_passwords.password = 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒÄôÐÎ¾¾jjnÌÈÓÔ§¡Ó';
+insert into machines values (1, '127.0.0.1', 1, false, '12-12-2022 20:00', '12-12-2022 20:00', 'name', '', '');
 
-select case when exists (select * from account_passwords inner join users on account_passwords.user_id = users.id where account_passwords.password = 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒ
+select * from passwords;
 
-                                                                                                                                                                                                ÄôÐÎ¾¾jjnÌÈÓÔ§¡Ó';) then cast(1 as bit) else cast(0 as bit) end;
+update passwords set web='https://www.youtube.com' where id = 3;
+
+delete from users where id=2;
+
+select * from users inner join machines on users.id = machines.user_id where users.email = 'jakubanderle@outlook.cz' 
+and machines.ip = '127.0.0.1' and machines.verified = true

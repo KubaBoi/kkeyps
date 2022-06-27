@@ -1,0 +1,60 @@
+<html lang="cs">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KKeyps</title>
+</head>
+
+<style>
+    body {
+        color: #f5fbef;
+        background-color: #231f20;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+        color: #f5fbef;
+    }
+</style>
+
+<body>
+    <h2>Is this your machine?</h2>
+    <p>
+        There was an connection attempt into your KKeyps account. We have never seen you logging in from this machine. Is that really you?
+    </p>
+    <table>
+        <tr>
+            <td>Machine ip: </td>
+            <td>$IP$</td>
+        </tr>
+        <tr>
+            <td>Date of first connection:</td>
+            <td>$ORIGIN_DATE$</td>
+        </tr>
+        <tr>
+            <td>Date of last connection:</td>
+            <td>$LAST_CONNECTION$</td>
+        </tr>
+        <tr>
+            <td>Client agent:</td>
+            <td>$USER_AGENT$</td>
+        </tr>
+        <tr>
+            <td>Platform:</td>
+            <td>$PLATFORM$</td>
+        </tr>
+    </table>
+
+    <p>
+        Your account is temporary disabled in case that it was not you. Please understand our worries about your security.
+    </p>
+
+
+    <a href="http://localhost:7969/emails/reg?code=$CODE$&type=0">
+        Yes it was me and I want to register this machine</a><br>
+    <a href="http://localhost:7969/emails/reg?code=$CODE$&type=1">
+        Yes it was me but I DO NOT want to register this machine</a><br>
+    <a href="http://localhost:7969/emails/reg?code=$CODE$&type=2">
+        No it was not me. Let me change my password</a><br>
+</body>
+</html>

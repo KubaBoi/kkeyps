@@ -25,7 +25,12 @@ async function login(userName, password) {
             );
         }
         else if (alert) {
-            showErrorAlert(response.ERROR, alertTime);
+            if (response.ERROR.DESCRIPTION.startsWith("This machine")) {
+                showAlert(response.ERROR.NAME + " - " + response.ERROR.CODE, response.ERROR.DESCRIPTION);
+            }
+            else {
+                showErrorAlert(response.ERROR, alertTime);
+            }
         }
     }
 }

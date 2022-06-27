@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS public.users
 (
     id bigint NOT NULL,
     email text NOT NULL,
+    enabled boolean NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -33,6 +34,28 @@ CREATE TABLE IF NOT EXISTS public.passwords
     user_name text NOT NULL,
     web text NOT NULL,
     password text NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.machines
+(
+    id bigint NOT NULL,
+    ip text NOT NULL,
+    user_id bigint NOT NULL,
+    verified boolean NOT NULL,
+    origin_date timestamp with time zone NOT NULL,
+    last_connection timestamp with time zone NOT NULL,
+    name text NOT NULL,
+    user_agent text NOT NULL,
+    platform text NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS public.confirmations
+(
+    id bigint NOT NULL,
+    machine_id bigint NOT NULL,
+    code text NOT NULL,
     PRIMARY KEY (id)
 );
 END;
