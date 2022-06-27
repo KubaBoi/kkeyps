@@ -22,7 +22,7 @@ if __name__ == "__main__":
             req = {
                 "name": Settings.name,
                 "port": Settings.port,
-                "icon": "/images/gridIcons/frogieCloud.png",
+                "icon": "/favicon.png",
                 "color": "FF0000"
             }
             requests.post(f"http://localhost/services/doYouKnowMe", json=req)
