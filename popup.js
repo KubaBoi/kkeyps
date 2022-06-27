@@ -9,10 +9,18 @@ updateTable();
 let loginButt = document.getElementById("loginButt");
 let logoutButt = document.getElementById("logoutButt");
 let updateButt = document.getElementById("updateButt");
+let addPassButt = document.getElementById("addPassButt");
+let generateButt = document.getElementById("generateButt");
+let createPassButt = document.getElementById("createPassButt");
+let closeAddPassButt = document.getElementById("closeAddPassButt");
 
 loginButt.addEventListener("click", newLogin);
 logoutButt.addEventListener("click", logout);
 updateButt.addEventListener("click", updateTable);
+addPassButt.addEventListener("click", showAddDialog);
+generateButt.addEventListener("click", randomPass);
+createPassButt.addEventListener("click", createPass);
+closeAddPassButt.addEventListener("click", closeAddDialog);
 
 async function updateTable() {
     let tbl = document.getElementById("passTable");
@@ -67,4 +75,49 @@ async function copyPass() {
         document.getElementById("errorP2").innerHTML = response.ERROR.DESCRIPTION;
         console.log(response.ERROR);
     }
+}
+
+async function createPass() {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let web = tab.url.split("/");
+    web = `${web[0]}//${web[2]}`;
+
+    let userName = document.getElementById("addUserNameInp").value;
+    let pass = document.getElementById("addPassInp").value;
+
+    req = {
+        "WEB": web,
+        "USER_NAME": userName,
+        "PASSWORD": pass
+    };
+
+    let response = await callEndpoint("POST", `${address}/passwords/create`, req);
+    if (response.ERROR == null) {
+        closeAddDialog();
+        updateTable();
+    }
+    else {
+        document.getElementById("errorP2").innerHTML = response.ERROR.DESCRIPTION;
+        console.log(response.ERROR);
+    }
+}
+
+function showAddDialog() {
+    document.getElementById("addDiv").style.visibility = "visible";
+}
+
+function closeAddDialog() {
+    document.getElementById("addDiv").style.visibility = "hidden";
+}
+
+function randomPass() {
+    let length = 20;
+    let result = "";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_@.$&";
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    console.log(result);
+    document.getElementById("addPassInp").value = result;
 }

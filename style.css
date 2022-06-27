@@ -6,6 +6,15 @@ body {
     visibility: hidden;
 }
 
+#addDiv {
+    background-color: white;
+    width: 90%;
+    padding: 5px;
+    border: solid;
+    border-color: black;
+    visibility: hidden;
+}
+
 table {
     width: 100%;
 }

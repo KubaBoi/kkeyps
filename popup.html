@@ -6,7 +6,7 @@
 
 <body>
     <h1>KKeyps</h1>
-    <a href="http://localhost" target="_blank">KKeyps web</a>
+    <a href="http://frogie.cz:7969" target="_blank">KKeyps web</a>
     <div id="loginDiv">
         <input type="text" id="nameInp"></input>
         <input type="password" id="passInp"></input>
@@ -16,8 +16,17 @@
     <div id="loggedDiv">
         <button id="logoutButt">Logout</button>
         <button id="updateButt">Update</button>
+        <button id="addPassButt">Add password</button>
         <table id="passTable"></table>
         <p id="errorP2" style="color:red"></p>
+    </div>
+    <div id="addDiv">
+        <input id="addUserNameInp" type="text" placeholder="User name"></input>
+        <input id="addPassInp" type="password" placeholder="Password"></input>
+        <br><br>
+        <button id="generateButt">Generate random</button><br>
+        <button id="createPassButt">Create password</button><br>
+        <button id="closeAddPassButt">Close</button>
     </div>
 
     <script src="cheese.js"></script>
