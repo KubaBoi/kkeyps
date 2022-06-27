@@ -17,7 +17,7 @@ class PasswordsController(cc):
         
         passwords = pr.findBy("user_id", userModel.id)
         for psw in passwords:
-            psw.password = "HIDDEN"
+            psw.password = u"\u2022"*10
 
         return cc.createResponse({"PASSWORDS": cc.modulesToJsonArray(passwords)})
 

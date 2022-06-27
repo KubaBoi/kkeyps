@@ -55,7 +55,7 @@ async function showPass(index) {
 }
 
 function hidePass(index) {
-    document.getElementById(`passTd${index}`).innerHTML = "HIDDEN";
+    document.getElementById(`passTd${index}`).innerHTML = "••••••••••";
     document.getElementById(`showTd${index}`).innerHTML = `<img src='/images/showPass.png' onclick=showPass(${index})>`;
 }
 
