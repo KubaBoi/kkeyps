@@ -55,7 +55,6 @@ class UsersController(cc):
             userAgent = headers["User-Agent"]
         if ("sec-ch-ua-platform" in headers.keys()):
             platform = headers["sec-ch-ua-platform"]
-        print(headers)
 
         machineModel = mr.model()
         machineModel.setAttrs(
