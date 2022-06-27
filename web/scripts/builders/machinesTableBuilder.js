@@ -26,6 +26,14 @@ async function buildMachinesTable() {
                 {"text": "User Agent"},
                 {"text": machine.USER_AGENT}
             ]);
+            addRow(tbl, [
+                {"text": "First connection"},
+                {"text": machine.ORIGIN_DATE}
+            ]);
+            addRow(tbl, [
+                {"text": "Last connection"},
+                {"text": machine.LAST_CONNECTION}
+            ]);
         }
     }
     else {
