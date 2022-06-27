@@ -10,6 +10,8 @@ async function buildMachinesTable() {
         for (let i = 0; i < machines.length; i++) {
             let machine = machines[i];
 
+            addHeader(tbl, [{"text": "=="}]);
+            addHeader(tbl, [{"text": ""}]);
             addHeader(tbl, [
                 {"text": machine.NAME},
             ]);
