@@ -15,10 +15,20 @@
 <body>
 
 <h1>KKeyps</h1>
-<button onclick="logout()">Log out</button>
-<button onclick="addPassword()">Add password</button>
 <br>
-<table id="passTable"></table>
+<div class="contentDiv">
+    <h3>Passwords</h3>
+    <button onclick="logout()">Log out</button>
+    <button onclick="addPassword()">Add password</button>
+    <button onclick="buildPassTable()">Update</button>
+    <br><br>
+    <table id="passTable"></table>
+
+    <h3>Machines</h3>
+    <button onclick="buildMachinesTable()">Update</button>
+    <br><br>
+    <table id="machinesTable"></table>
+</div>
 
 <div id="addPassDiv">
     <table>
@@ -42,14 +52,7 @@
 </div>
 
 <!-- EXTERNAL SCRIPTS -->
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/time.js"></script>
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/communication.js"></script>
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/cookies.js"></script>
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/alerts.js"></script>
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/elementManager.js"></script>
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/tableBuilder.js"></script> 
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/autoComplete.js"></script> 
-<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/arrays.js"></script> 
+<script src="https://kubaboi.github.io/CheeseFramework/public/scripts/cheese.js"></script>
 
 <!-- CUSTOM -->
 <script src="scripts/customs/loading.js"></script>
@@ -62,6 +65,7 @@
 
 <!-- BUILDERS -->
 <script src="scripts/builders/passTableBuilder.js"></script>
+<script src="scripts/builders/machinesTableBuilder.js"></script>
 
 <!-- START -->
 <script src="scripts/inits/variables.js"></script>

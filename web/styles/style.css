@@ -5,12 +5,23 @@ body {
 }
 
 table {
-    width: 50%;
-    margin: auto;
+    width: 100%;
+    background-color: var(--light-color);
+    border-collapse: collapse;
 }
 
-td {
-    background-color: var(--light-color);
+tr:nth-child(even) {
+    background-color: var(--main-color);
+}
+
+.passTd {
+    min-width: 210px;
+}
+
+.contentDiv {
+    position: relative;
+    width: 50%;
+    margin: auto;
 }
 
 #addPassDiv {
@@ -23,4 +34,11 @@ td {
     border: solid;
     border-color: var(--main-text-color);
     visibility: hidden;
+}
+
+#menuDiv {
+    position: fixed;
+    left: 0;
+    top: 50px;
+    margin: 20px;
 }

@@ -59,7 +59,11 @@ function hidePass(index) {
     document.getElementById(`showTd${index}`).innerHTML = `<img src='/images/showPass.png' onclick=showPass(${index})>`;
 }
 
-async function removePass(index) {
+function removePass(index) {
+    showConfirm("Really?", "Do you really want to remove this password?", function() {removePassR(index);});
+}
+
+async function removePassR(index) {
     let web = document.getElementById(`webTd${index}`).innerHTML;
     let userName = document.getElementById(`userNameTd${index}`).innerHTML;
 

@@ -6,4 +6,5 @@ var loadingDiv = document.getElementById("loaderDiv");
 
 if (login(userName, password)) {
     buildPassTable();
+    buildMachinesTable();
 }
