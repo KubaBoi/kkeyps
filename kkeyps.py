@@ -16,7 +16,7 @@ main file of Cheese Application
 if __name__ == "__main__":
     CheeseBurger.init()
 
-    i = 0
+    """i = 0
     while i < 1:
         try:
             req = {
@@ -29,6 +29,6 @@ if __name__ == "__main__":
             break
         except:
             i += 1
-            time.sleep(1)
+            time.sleep(1)"""
 
     CheeseBurger.serveForever()

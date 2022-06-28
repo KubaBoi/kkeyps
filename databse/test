@@ -2,6 +2,14 @@ select * from users;
 select * from account_passwords;
 select * from machines;
 select * from confirmations;
+select * from roles;
+
+insert into roles values (0, 0, 0);
+insert into users values (0, 'admin', true);
+insert into account_passwords values (0, 0, 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒ
+
+                        ÄôÐÎ¾¾jjnÌÈºÅÝÄ¨©t¬ÅÜÍ¯â·¤ñ³Í¾¢uØÙ
+n»¦¡');
 
 delete from confirmations;
 
@@ -13,5 +21,5 @@ update passwords set web='https://www.youtube.com' where id = 3;
 
 delete from users where id=2;
 
-select * from users inner join machines on users.id = machines.user_id where users.email = 'jakubanderle@outlook.cz' 
-and machines.ip = '127.0.0.1' and machines.verified = true
+select case when exists (select * from users) 
+then cast(1 as bit) else cast(0 as bit) end;

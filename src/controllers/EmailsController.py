@@ -1,14 +1,10 @@
 
 from datetime import datetime
-import smtplib
+import json
 import string
 import random
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import json
 
 from Cheese.resourceManager import ResMan
-from Cheese.appSettings import Settings
 from Cheese.cheeseController import CheeseController as cc
 from Cheese.httpClientErrors import *
 
@@ -17,6 +13,8 @@ from src.controllers.UsersController import UsersController as uc
 from src.repositories.machinesRepository import MachinesRepository as mr
 from src.repositories.usersRepository import UsersRepository as ur
 from src.repositories.confirmationsRepository import ConfirmationsRepository as cr
+
+from src.tools.LetterMan import LetterMan
 
 #@controller /emails;
 class EmailsController(cc):
@@ -62,7 +60,7 @@ class EmailsController(cc):
         )
         cr.save(confModel)
 
-        EmailsController.sendMail(login, html, "Machine confirmation")
+        LetterMan.sendMail(login, html, "Machine confirmation")
 
         return cc.createResponse({"STATUS": "OK"})
 
@@ -93,26 +91,4 @@ class EmailsController(cc):
             return cc.createResponse({"STATUS": "We have send you an email with your new password :)"})
 
 
-    # METHODS
-
-    @staticmethod
-    def sendMail(email, html, subject):
-        smtp_user = "anticary@gmail.com"
-        smtp_password = Settings.emailCode
-        server = "smtp.gmail.com"
-        port = 587
-        msg = MIMEMultipart("alternative")
-        msg["Subject"] = subject
-        msg["From"] = smtp_user
-        msg["To"] = email
-
-        part2 = MIMEText(html, "html")
-        msg.attach(part2)
-
-        s = smtplib.SMTP(server, port)
-        s.ehlo()
-        s.starttls()
-        s.login(smtp_user, smtp_password)
-        s.sendmail(smtp_user, email, msg.as_string())
-        s.quit()
     

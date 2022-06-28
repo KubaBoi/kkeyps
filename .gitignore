@@ -7,6 +7,8 @@ secretPass
 secrets.json
 adminSettings.json
 securitySettings.json
+adminPass
+updateKey.py
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,python

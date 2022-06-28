@@ -1,10 +1,10 @@
 
 from datetime import datetime
 
-from Cheese.metadata import Metadata
-from Cheese.appSettings import Settings
 from Cheese.cheeseController import CheeseController as cc
 from Cheese.httpClientErrors import *
+
+from src.tools.GateKeeper import GateKeeper
 
 from src.repositories.usersRepository import UsersRepository as ur
 from src.repositories.accPassRepository import AccPassRepository as apr
@@ -20,7 +20,7 @@ class UsersController(cc):
         cc.checkJson(["MAIL", "PASSWORD"], args)
 
         mail = args["MAIL"]
-        password = Metadata.encode(args["PASSWORD"], Settings.passKey)
+        password = GateKeeper.encode(args["PASSWORD"])
 
         cc.getHeadersDict(server)
 

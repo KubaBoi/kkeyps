@@ -1,8 +1,8 @@
 
-from Cheese.metadata import Metadata
-from Cheese.appSettings import Settings
 from Cheese.cheeseController import CheeseController as cc
 from Cheese.httpClientErrors import *
+
+from src.tools.GateKeeper import GateKeeper
 
 from src.repositories.usersRepository import UsersRepository as ur
 from src.repositories.passwordsRepository import PasswordsRepository as pr
@@ -29,7 +29,7 @@ class PasswordsController(cc):
 
         userName = args["USER_NAME"]
         web = args["WEB"]
-        psw = Metadata.encode(args["PASSWORD"], Settings.passKey)
+        psw = GateKeeper.encode(args["PASSWORD"])
         
         userModel = ur.findOneBy("email", auth["login"]["login"])
 
@@ -53,7 +53,7 @@ class PasswordsController(cc):
         userModel = ur.findOneBy("email", auth["login"]["login"])
         pswModel = pr.findByUserIdAndWebAndUserName(userModel.id, args["web"], args["userName"])
 
-        psw = Metadata.decode(pswModel.password, Settings.passKey)
+        psw = GateKeeper.decode(pswModel.password)
 
         return cc.createResponse({"PASSWORD": psw})
 
@@ -83,3 +83,23 @@ class PasswordsController(cc):
             psw.password = "HIDDEN"
 
         return cc.createResponse({"PASSWORDS": cc.modulesToJsonArray(passwords)})
+
+    #@post /updateKey;
+    @staticmethod
+    def updateKey(server, path, auth):
+        args = cc.readArgs(server)
+        cc.checkJson(["NK", "OK"], args)
+
+        GateKeeper.sendConfirmation(args["NK"], args["OK"], cc.getClientAddress(server))
+
+        return cc.createResponse({"STATUS": "OK"})
+
+    #@get /confirmKeyUpdate;
+    @staticmethod
+    def confirmKeyUpdate(server, path, auth):
+        args = cc.getArgs(path)
+        cc.checkJson(["hash"], args)
+
+        GateKeeper.updateKey(args["hash"], cc.getClientAddress(server))
+
+        return cc.createResponse({"STATUS": "OK"})
