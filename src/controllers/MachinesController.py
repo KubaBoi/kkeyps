@@ -39,17 +39,17 @@ class MachinesController(cc):
                     tor = "",
                 )
             else:
-                Logger.info(req.text)
                 jsn = json.loads(req.text)
+                Logger.info(json.dumps(jsn, indent=4, sort_keys=True))
                 machine.setAttrs(
-                    city = jsn["location"]["city"],
-                    region = jsn["location"]["region"],
-                    country = jsn["location"]["country"],
-                    lat = jsn["location"]["lat"],
-                    lng = jsn["location"]["lng"],
-                    proxy = jsn["proxy"]["proxy"],
-                    vpn = jsn["proxy"]["vpn"],
-                    tor = jsn["proxy"]["tor"],
+                    city=jsn["location"]["city"],
+                    region=jsn["location"]["region"],
+                    country=jsn["location"]["country"],
+                    lat=jsn["location"]["lat"],
+                    lng=jsn["location"]["lng"],
+                    proxy=jsn["proxy"]["proxy"],
+                    vpn=jsn["proxy"]["vpn"],
+                    tor=jsn["proxy"]["tor"],
                 )
             newMachines.append(machine)
 
