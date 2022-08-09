@@ -3,15 +3,30 @@ select * from account_passwords;
 select * from machines;
 select * from confirmations;
 select * from roles;
+select * from passwords;
+
+delete from passwords;
+
+delete from users where id=3;
+delete from machines where user_id=3;
+delete from confirmations;
+
+update users set enabled = true;
+update users set id=0 where id = 3;
+update account_passwords set user_id=0 where id = 0;
 
 insert into roles values (0, 0, 0);
 insert into users values (0, 'admin', true);
 insert into account_passwords values (0, 0, 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒ
 
-                        ÄôÐÎ¾¾jjnÌÈºÅÝÄ¨©t¬ÅÜÍ¯â·¤ñ³Í¾¢uØÙ
-n»¦¡');
+                        ÄôÐÎ¾¾jjnÌÈºÅÝÄ¨©¤²');
+insert into machines values (0, '185.167.209.79', 0, true, '12-12-2022 20:00', '12-12-2022 20:00', 'name', '', '');
+insert into machines values (5, '127.0.0.1', 0, true, '12-12-2022 20:00', '12-12-2022 20:00', 'name', '', '');
 
-delete from confirmations;
+
+select * from account_passwords inner join users on account_passwords.user_id = users.id where users.email = 'admin' and account_passwords.password = 'ÖÞhjÈÌ¾ÌæÈÌ¤¨hpdjl¾ÈÖÌÔÒ
+
+                                                                                                                                                                               ÄôÐÎ¾¾jjnÌÈºÅÝÄ¨©¤²'
 
 insert into machines values (1, '127.0.0.1', 1, false, '12-12-2022 20:00', '12-12-2022 20:00', 'name', '', '');
 
