@@ -19,6 +19,7 @@ class MachinesController(cc):
         userModel = ur.findOneBy("email", auth["login"]["login"])
         
         machines = mr.findBy("user_id", userModel.id)
+        newMachines = []
         for machine in machines:
             req = requests.get(f"""https://geo.ipify.org/api/v2/country,city,vpn?
                 apiKey={Settings.geoApiKey}&
@@ -46,8 +47,9 @@ class MachinesController(cc):
                     vpn = jsn["proxy"]["vpn"],
                     tor = jsn["proxy"]["tor"],
                 )
+            newMachines.append(machine)
 
-        return cc.createResponse({"MACHINES": cc.modulesToJsonArray(machines)})
+        return cc.createResponse({"MACHINES": cc.modulesToJsonArray(newMachines)})
 
     #@post /logMachine;
     @staticmethod
