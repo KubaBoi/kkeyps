@@ -22,9 +22,9 @@ class MachinesController(cc):
         machines = mr.findBy("user_id", userModel.id)
         newMachines = []
         for machine in machines:
-            req = requests.get(f"""https://geo.ipify.org/api/v2/country,city,vpn?
-                apiKey={Settings.geoApiKey}&
-                ipAddress={machine.ip}""")
+            reqText = f"https://geo.ipify.org/api/v2/country,city,vpn?apiKey={Settings.geoApiKey}&ipAddress={machine.ip}"
+            Logger.info(f"Sending GET request: {reqText}")
+            req = requests.get(reqText)
 
             if (req.status_code != 200):
                 Logger.fail("Fail while getting info about machine")
