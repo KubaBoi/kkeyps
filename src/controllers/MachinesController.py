@@ -20,7 +20,6 @@ class MachinesController(cc):
         userModel = ur.findOneBy("email", auth["login"]["login"])
         
         machines = mr.findBy("user_id", userModel.id)
-        newMachines = []
         for machine in machines:
             reqText = f"https://geo.ipify.org/api/v2/country,city,vpn?apiKey={Settings.geoApiKey}&ipAddress={machine.ip}"
             Logger.info(f"Sending GET request: {reqText}")
@@ -28,32 +27,19 @@ class MachinesController(cc):
 
             if (req.status_code != 200):
                 Logger.fail("Fail while getting info about machine")
-                machine.setAttrs(
-                    city = "",
-                    region = "",
-                    country = "",
-                    lat = "",
-                    lng = "",
-                    proxy = "",
-                    vpn = "",
-                    tor = "",
-                )
             else:
                 jsn = json.loads(req.text)
                 Logger.info(json.dumps(jsn, indent=4, sort_keys=True))
-                machine.setAttrs(
-                    city=jsn["location"]["city"],
-                    region=jsn["location"]["region"],
-                    country=jsn["location"]["country"],
-                    lat=jsn["location"]["lat"],
-                    lng=jsn["location"]["lng"],
-                    proxy=jsn["proxy"]["proxy"],
-                    vpn=jsn["proxy"]["vpn"],
-                    tor=jsn["proxy"]["tor"],
-                )
-            newMachines.append(machine)
+                setattr(machine, "city", jsn["location"]["city"])
+                setattr(machine, "region", jsn["location"]["region"])
+                setattr(machine, "country", jsn["location"]["country"])
+                setattr(machine, "lat", jsn["location"]["lat"])
+                setattr(machine, "lng", jsn["location"]["lng"])
+                setattr(machine, "proxy", jsn["proxy"]["proxy"])
+                setattr(machine, "vpn", jsn["proxy"]["vpn"])
+                setattr(machine, "tor", jsn["proxy"]["tor"])
 
-        return cc.createResponse({"MACHINES": cc.modulesToJsonArray(newMachines)})
+        return cc.createResponse({"MACHINES": cc.modulesToJsonArray(machines)})
 
     #@post /logMachine;
     @staticmethod
