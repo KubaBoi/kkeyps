@@ -10,13 +10,6 @@ async function buildMachinesTable() {
         for (let i = 0; i < machines.length; i++) {
             let machine = machines[i];
 
-            let machineInfo = await callEndpoint("GET", `https://geo.ipify.org/api/v2/country,city,vpn?
-            apiKey=at_k6g08TyyOqwxfcFeGq36rpdGAO3Rr&
-            ipAddress=${machine.IP}`);
-
-            let locInfo = machineInfo.location;
-            let proxyInfo = machineInfo.proxy;
-
             addHeader(tbl, [{"text": "=="}]);
             addHeader(tbl, [{"text": ""}]);
             addHeader(tbl, [
@@ -29,11 +22,11 @@ async function buildMachinesTable() {
             ]);
             addRow(tbl, [
                 {"text": "Location"},
-                {"text": `${locInfo.city}, ${locInfo.region}, ${locInfo.country} <br>lat: ${locInfo.lat}<br>lng: ${locInfo.lng}`}
+                {"text": `${machine.CITY}, ${machine.REGION}, ${machine.COUNTRY} <br>lat: ${machine.LAT}<br>lng: ${machine.LNG}`}
             ]);
             addRow(tbl, [
                 {"text": "Proxy"},
-                {"text": `PROXY: ${proxyInfo.proxy}, VPN: ${proxyInfo.vpn}, TOR: ${proxyInfo.tor}`}
+                {"text": `PROXY: ${machine.PROXY}, VPN: ${machine.VPN}, TOR: ${machine.TOR}`}
             ]);
             addRow(tbl, [
                 {"text": "Platform"},

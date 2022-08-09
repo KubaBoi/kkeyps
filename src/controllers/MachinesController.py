@@ -1,6 +1,10 @@
 
 from datetime import datetime
+import requests
+import json
+
 from Cheese.cheeseController import CheeseController as cc
+from Cheese.appSettings import Settings
 from Cheese.httpClientErrors import *
 
 from src.repositories.usersRepository import UsersRepository as ur
@@ -15,6 +19,33 @@ class MachinesController(cc):
         userModel = ur.findOneBy("email", auth["login"]["login"])
         
         machines = mr.findBy("user_id", userModel.id)
+        for machine in machines:
+            req = requests.get(f"""https://geo.ipify.org/api/v2/country,city,vpn?
+                apiKey={Settings.geoApiKey}&
+                ipAddress={machine.ip}""")
+            if (req.status_code != 200):
+                machine.setAttrs(
+                    city = "",
+                    region = "",
+                    country = "",
+                    lat = "",
+                    lng = "",
+                    proxy = "",
+                    vpn = "",
+                    tor = "",
+                )
+            else:
+                jsn = json.loads(req.text)
+                machine.setAttrs(
+                    city = jsn["location"]["city"],
+                    region = jsn["location"]["region"],
+                    country = jsn["location"]["country"],
+                    lat = jsn["location"]["lat"],
+                    lng = jsn["location"]["lng"],
+                    proxy = jsn["proxy"]["proxy"],
+                    vpn = jsn["proxy"]["vpn"],
+                    tor = jsn["proxy"]["tor"],
+                )
 
         return cc.createResponse({"MACHINES": cc.modulesToJsonArray(machines)})
 
