@@ -5,6 +5,7 @@ import json
 
 from Cheese.cheeseController import CheeseController as cc
 from Cheese.appSettings import Settings
+from Cheese.Logger import Logger
 from Cheese.httpClientErrors import *
 
 from src.repositories.usersRepository import UsersRepository as ur
@@ -24,7 +25,9 @@ class MachinesController(cc):
             req = requests.get(f"""https://geo.ipify.org/api/v2/country,city,vpn?
                 apiKey={Settings.geoApiKey}&
                 ipAddress={machine.ip}""")
+
             if (req.status_code != 200):
+                Logger.fail("Fail while getting info about machine")
                 machine.setAttrs(
                     city = "",
                     region = "",
@@ -36,6 +39,7 @@ class MachinesController(cc):
                     tor = "",
                 )
             else:
+                Logger.info(req.text)
                 jsn = json.loads(req.text)
                 machine.setAttrs(
                     city = jsn["location"]["city"],
